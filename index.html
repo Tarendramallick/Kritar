@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Influencer Marketing Platform — Presentation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0f14; --card:#0f1720; --muted:#9aa4b2; --accent:#6ee7b7; --glass:rgba(255,255,255,0.03);
+      --accent-2:#60a5fa;
+      --danger:#ff6b6b; --glass-2:rgba(255,255,255,0.02);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;background:linear-gradient(180deg,#05060a 0%, #08101a 100%); color:#e6eef6}
+
+    /* container */
+    .deck{width:100%;height:100vh;display:flex;align-items:center;justify-content:center;padding:40px}
+    .slide{width:1100px;max-width:calc(100% - 80px);height:640px;background:linear-gradient(180deg,var(--card), #071226 120%);border-radius:16px;box-shadow:0 10px 40px rgba(2,6,23,0.7);overflow:hidden;position:relative;border:1px solid rgba(255,255,255,0.03)}
+
+    /* nav */
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:22px 28px;border-bottom:1px solid var(--glass-2)}
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700;color:#032;box-shadow:0 6px 18px rgba(102,178,255,0.08)}
+    .brand h1{font-size:18px;margin:0}
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+    .controls{display:flex;gap:10px;align-items:center}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:8px;color:var(--muted);cursor:pointer;font-weight:600}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#012; border:0}
+    .btn.ghost{background:transparent;border:0;color:var(--muted)}
+
+    /* content */
+    .content{display:grid;grid-template-columns:430px 1fr;padding:28px 32px;gap:24px;height:calc(100% - 84px)}
+
+    /* left column */
+    .panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:12px;padding:20px;border:1px solid var(--glass)}
+    .panel h2{margin:0 0 8px 0;font-size:18px}
+    .muted{color:var(--muted);font-size:13px}
+
+    .kpi{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+    .k{flex:1 1 48%;background:linear-gradient(180deg, rgba(255,255,255,0.015), transparent);padding:12px;border-radius:10px;border:1px solid var(--glass-2)}
+    .k strong{display:block;font-size:18px}
+    .k span{font-size:12px;color:var(--muted)}
+
+    .features{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .feature{background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.02);font-size:13px}
+
+    /* right column */
+    .stage{height:100%;display:flex;flex-direction:column}
+    .hero{flex:0 0 72%;display:flex;flex-direction:column;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid var(--glass)}
+    .hero h3{margin:0;font-size:22px}
+    .hero p{margin-top:8px;color:var(--muted)}
+
+    .cards{display:flex;gap:12px;margin-top:16px}
+    .card{flex:1;padding:14px;border-radius:12px;background:linear-gradient(180deg,#06121a, #071826);border:1px solid rgba(255,255,255,0.02)}
+    .card h4{margin:0 0 6px 0}
+    .card p{margin:0;color:var(--muted);font-size:13px}
+
+    .notes{flex:1;margin-top:14px;padding:12px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid var(--glass-2);font-size:13px;color:var(--muted);overflow:auto}
+
+    /* footer controls */
+    .footer{position:absolute;bottom:14px;left:20px;right:20px;display:flex;align-items:center;justify-content:space-between}
+    .progress{height:6px;background:rgba(255,255,255,0.03);border-radius:6px;overflow:hidden;flex:1;margin:0 20px}
+    .progress > i{display:block;height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent-2));transition:width .35s ease}
+
+    .page-ind{min-width:120px;text-align:right;color:var(--muted);font-size:13px}
+
+    /* Responsive */
+    @media (max-width:1100px){.content{grid-template-columns:1fr}}
+
+    /* slide variations */
+    .slide.alt-hero{background:linear-gradient(180deg,#071226,#04121a)}
+    .big-title{font-size:40px;line-height:1;margin:8px 0}
+    .subtitle{color:var(--muted);font-size:15px}
+
+    /* list styles */
+    .checklist{display:grid;gap:10px;margin-top:12px}
+    .item{display:flex;gap:12px;align-items:flex-start}
+    .dot{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.03);display:flex;align-items:center;justify-content:center;font-weight:700}
+
+    /* small helpers */
+    .muted-sm{color:var(--muted);font-size:12px}
+
+    /* slide animations */
+    .fade-in{animation:fadeIn .45s ease both}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  </style>
+</head>
+<body>
+  <div class="deck">
+    <div class="slide" id="slide">
+      <div class="topbar">
+        <div class="brand">
+          <div class="logo">IM</div>
+          <div>
+            <h1>Influencer Marketing OS</h1>
+            <p class="muted">Unified automation • analytics • collaboration</p>
+          </div>
+        </div>
+        <div class="controls">
+          <button class="btn" id="prev">← Prev</button>
+          <button class="btn primary" id="next">Next →</button>
+          <button class="btn ghost" onclick="window.print()">Export PDF</button>
+        </div>
+      </div>
+
+      <div class="content" id="content-area">
+        <!-- left column -->
+        <div class="panel fade-in" id="left">
+          <h2 id="slide-title">Title</h2>
+          <p class="muted" id="slide-sub">Slide subtitle goes here</p>
+
+          <div class="kpi" id="kpis">
+            <div class="k"><strong id="k1">—</strong><span>Key metric</span></div>
+            <div class="k"><strong id="k2">—</strong><span>Key metric</span></div>
+            <div class="k"><strong id="k3">—</strong><span>Key metric</span></div>
+            <div class="k"><strong id="k4">—</strong><span>Key metric</span></div>
+          </div>
+
+          <div class="features" id="features">
+            <!-- small feature cards populated by JS -->
+          </div>
+
+        </div>
+
+        <!-- right column -->
+        <div class="stage">
+          <div class="hero fade-in" id="right-hero">
+            <h3 id="hero-heading">Heading</h3>
+            <p id="hero-sub" class="muted">Hero description</p>
+
+            <div class="cards" id="hero-cards">
+              <div class="card">
+                <h4 id="card1-title">Card A</h4>
+                <p id="card1-sub">Short summary</p>
+              </div>
+              <div class="card">
+                <h4 id="card2-title">Card B</h4>
+                <p id="card2-sub">Short summary</p>
+              </div>
+            </div>
+
+            <div class="notes" id="hero-notes">Notes and talking points</div>
+          </div>
+
+          <div class="panel" style="margin-top:12px;">
+            <h2>Slide navigation</h2>
+            <p class="muted-sm">Use Next / Prev or arrow keys. Export to PDF with the button above.</p>
+            <div class="checklist" id="nav-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div class="muted-sm">Presenter: Tarendra Mallick</div>
+        </div>
+        <div class="progress"><i id="progress-bar"></i></div>
+        <div class="page-ind" id="page-ind">1 / 9</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const slides = [
+      {
+        title: 'Pitch — Vision',
+        sub: 'A unified OS for influencers, brands & agencies',
+        kpis:['Single hub','Multi-platform','AI-powered','Secure by design'],
+        features:['Smart Automation Suite','AI Growth Mentor','Campaign Marketplace','Affiliate Tracking'],
+        hero:{heading:'Problem + Opportunity', sub:'Creators and brands juggle many tools — we centralize automation, analytics and collaboration into one product.', cards:[{t:'Scale',s:'Automate repetitive growth tasks'},{t:'Trust',s:'Verified profiles & reputation scoring'}],notes:'Talking points:\n• Market size & pain points\n• One dashboard for organic + paid' }
+      },
+      {
+        title:'Core: Automation', sub:'Auto DM, Auto Comments, Scheduler, Safe Rate Control',
+        kpis:['Auto DM templates','Scheduled posts','Rate-limit safe','Multi-account'],
+        features:['Auto DM & Replies','Auto Comments & Like Flows','Content Scheduler','Engagement Pods'],
+        hero:{heading:'Automation Suite', sub:'Automate outreach, engagement and content publishing while staying compliant with platform limits.', cards:[{t:'DM Composer',s:'Template + personalization'},{t:'Scheduler',s:'Grid + story scheduling'}],notes:'Talking points:\n• Personalization tokens\n• Throttling & rate limits' }
+      },
+      {
+        title:'Core: Analytics', sub:'Profile audits, Growth forecasting, Competitor insights',
+        kpis:['Follower growth','Engagement rate','Avg Reach','Profile Score'],
+        features:['Follower cohorts','Sentiment analysis','Trend tracker','Predictive post scoring'],
+        hero:{heading:'Analytics & Insights', sub:'Deep, actionable analytics that translate into content decisions.', cards:[{t:'Profile Health',s:'Fake follower detection & audit'},{t:'Best times',s:'Post time recommendations'}],notes:'Talking points:\n• Data-driven suggestions\n• Auto-reporting to clients' }
+      },
+      {
+        title:'Collaboration & Campaigns', sub:'Marketplace, Contracts, Payments & Reporting',
+        kpis:['Campaigns active','Avg deal size','Conversion rate','On-platform payments'],
+        features:['Campaign brief templates','In-platform negotiation','Milestone payments','Review system'],
+        hero:{heading:'Brand <> Creator Collaboration', sub:'Streamline discovery, negotiation, execution and payout in one place.', cards:[{t:'Marketplace',s:'Search & match creators'},{t:'Contracts',s:'Auto generated, e-sign ready'}],notes:'Talking points:\n• Escrow & milestones\n• Rating & dispute flows' }
+      },
+      {
+        title:'AI Tools & Creation', sub:'Caption, hashtag generation, video voiceover, content designer',
+        kpis:['Captions generated','Hashtag accuracy','AI edits','Time saved'],
+        features:['Caption + hashtag AI','Auto-subtitles','Reel insight engine','Content templates'],
+        hero:{heading:'Content Creation Assistant', sub:'Lower barrier for creators with templates, voiceovers and smart edits.', cards:[{t:'Designer',s:'Brand-aware templates'},{t:'Auto-sub',s:'Caption & SRT generation'}],notes:'Talking points:\n• Branded templates\n• Auto-edit suggestions' }
+      },
+      {
+        title:'Monetization & Growth', sub:'Affiliate tracking, sponsored posts, ROI dashboards',
+        kpis:['Affiliate clicks','Revenue generated','Avg sponsor ROI','Retention'],
+        features:['Affiliate dashboards','Payout automation','Sponsored post templates','Performance prediction'],
+        hero:{heading:'Monetize & Measure', sub:'Performance-based payouts and ROI tracking for brands and creators.', cards:[{t:'Tracking',s:'UTM + link-level analytics'},{t:'Payouts',s:'Auto payouts & invoices'}],notes:'Talking points:\n• Attribution models\n• Payout scheduling' }
+      },
+      {
+        title:'Security & Compliance', sub:'Rate-limit safety, OAuth, privacy, GDPR-ready',
+        kpis:['OAuth logins','Data retention','Audit logs','Compliance-ready'],
+        features:['OAuth & token refresh','Rate limit monitor','Data retention policies','Access roles & audit logs'],
+        hero:{heading:'Trust & Safety', sub:'Built to respect platform TOS and user privacy.', cards:[{t:'OAuth',s:'Secure login via Meta Graph'},{t:'Audit',s:'Activity logs & role permissions'}],notes:'Talking points:\n• GDPR & platform TOS compliance\n• Anti-abuse systems' }
+      },
+      {
+        title:'Tech Stack & Roadmap', sub:'Phase-wise plan for MVP → Scale',
+        kpis:['MVP 3 months','Beta users','Integrations','Scale targets'],
+        features:['Next.js UI','Node + Postgres','AWS S3 storage','OpenAI integrations'],
+        hero:{heading:'Roadmap (Phase 1→3)', sub:'MVP: automation + analytics. Phase 2: marketplace + AI. Phase 3: multi-platform + ads.', cards:[{t:'Phase 1',s:'Core automation + analytics'},{t:'Phase 2',s:'Marketplace + AI tools'}],notes:'Talking points:\n• Hiring needs\n• Beta launch plan' }
+      },
+      {
+        title:'Closing & CTA', sub:'Next steps and ask',
+        kpis:['Get early adopters','Build core team','Prepare beta'],
+        features:['Join beta','Provide feedback','Invest / Partner'],
+        hero:{heading:'Call to Action', sub:'Invite team, developers or investors to the beta program.', cards:[{t:'Beta signups',s:'Early access & discounted plans'},{t:'Contact',s:'Contact: tarendra@example.com'}],notes:'Talking points:\n• Timeline for beta\n• Keys to success' }
+      }
+    ];
+
+    let index = 0;
+    const total = slides.length;
+
+    function render(){
+      const s = slides[index];
+      document.getElementById('slide-title').innerText = s.title;
+      document.getElementById('slide-sub').innerText = s.sub;
+      document.getElementById('hero-heading').innerText = s.hero.heading;
+      document.getElementById('hero-sub').innerText = s.hero.sub;
+      document.getElementById('card1-title').innerText = s.hero.cards[0].t;
+      document.getElementById('card1-sub').innerText = s.hero.cards[0].s;
+      document.getElementById('card2-title').innerText = s.hero.cards[1].t;
+      document.getElementById('card2-sub').innerText = s.hero.cards[1].s;
+      document.getElementById('hero-notes').innerText = s.hero.notes;
+
+      // KPIs
+      for(let i=1;i<=4;i++){
+        document.getElementById('k'+i).innerText = s.kpis[i-1] || '—';
+      }
+
+      // features
+      const farea = document.getElementById('features'); farea.innerHTML='';
+      s.features.forEach(f=>{const d=document.createElement('div');d.className='feature';d.innerText=f;farea.appendChild(d)});
+
+      // nav checklist
+      const nav = document.getElementById('nav-list'); nav.innerHTML='';
+      slides.forEach((sl,i)=>{const el=document.createElement('div');el.className='item';el.innerHTML=`<div class="dot" style="background:${i===index? 'linear-gradient(90deg,var(--accent),var(--accent-2))':'rgba(255,255,255,0.02)'};">${i+1}</div><div><strong style="display:block">${sl.title}</strong><div class="muted-sm">${sl.sub}</div></div>`;nav.appendChild(el);});
+
+      // progress
+      const pc = Math.round(((index+1)/total)*100);
+      document.getElementById('progress-bar').style.width = pc + '%';
+      document.getElementById('page-ind').innerText = (index+1) + ' / ' + total;
+    }
+
+    document.getElementById('next').addEventListener('click',()=>{ index = Math.min(index+1, total-1); render(); });
+    document.getElementById('prev').addEventListener('click',()=>{ index = Math.max(index-1, 0); render(); });
+
+    document.addEventListener('keydown',(e)=>{
+      if(e.key === 'ArrowRight' || e.key === 'PageDown'){ index = Math.min(index+1, total-1); render(); }
+      if(e.key === 'ArrowLeft' || e.key === 'PageUp'){ index = Math.max(index-1, 0); render(); }
+    });
+
+    // initialize
+    render();
+  </script>
+</body>
+</html>

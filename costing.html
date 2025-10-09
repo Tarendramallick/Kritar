@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>MVP Pitch — Influencer Marketing Automation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#071226;--card:#0f1720;--muted:#9aa4b2;--accent:#6ee7b7;--accent2:#60a5fa}
+  body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,var(--bg),#040816);color:#e6eef6}
+  .wrap{max-width:1100px;margin:36px auto;padding:28px}
+  header{display:flex;align-items:center;justify-content:space-between;gap:20px}
+  .logo{display:flex;gap:12px;align-items:center}
+  .brand{background:linear-gradient(135deg,var(--accent),var(--accent2));width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#022;font-weight:700}
+  h1{margin:0;font-size:22px}
+  p.lead{color:var(--muted);margin-top:6px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}
+  .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+  h2{margin:0 0 8px 0}
+  table{width:100%;border-collapse:collapse;margin-top:10px}
+  th,td{padding:10px;border-bottom:1px solid rgba(255,255,255,0.03);text-align:left}
+  th{color:var(--muted);font-weight:600;font-size:13px}
+  .muted{color:var(--muted);font-size:13px}
+  .center{text-align:center}
+  .footnote{color:var(--muted);font-size:13px;margin-top:10px}
+  .cta{display:flex;gap:10px;justify-content:flex-end;margin-top:12px}
+  .btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer}
+  .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#022}
+  @media(max-width:900px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">
+        <div class="brand">IM</div>
+        <div>
+          <h1>Influencer Marketing Automation — MVP Pitch</h1>
+          <p class="lead">MVP plan, stack, team, and cost estimates (APIs & India-based hiring) — concise & professional</p>
+        </div>
+      </div>
+      <div class="muted">Prepared for: Investor / Team • Date: Oct 8, 2025</div>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <h2>1. MVP Objective</h2>
+        <p class="muted">Deliver a validated product that automates safe Instagram actions (DMs, comments), provides core analytics, and allows brands to run & manage campaigns — without payout/escrow handling (removed as requested).</p>
+        <ul class="muted">
+          <li>Instagram OAuth login for influencers & brands</li>
+          <li>Auto DM & Auto Comment with safe rate control (queue-based)</li>
+          <li>Basic analytics: follower growth, engagement rate, top posts</li>
+          <li>Campaign creation & influencer invite workflow</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>2. Tech Stack (MVP)</h2>
+        <table>
+          <tr><th>Layer</th><th>Technology</th></tr>
+          <tr><td>Frontend</td><td>Next.js (React), Tailwind CSS</td></tr>
+          <tr><td>Backend</td><td>Node.js + Express / NestJS</td></tr>
+          <tr><td>Database</td><td>PostgreSQL (Prisma ORM)</td></tr>
+          <tr><td>Queue</td><td>Redis + BullMQ (for scheduled jobs)</td></tr>
+          <tr><td>Storage</td><td>AWS S3 (media & exports)</td></tr>
+          <tr><td>AI</td><td>OpenAI (or alternative) for captions, sentiment, prediction</td></tr>
+          <tr><td>Hosting</td><td>Vercel (Frontend), AWS / Render (API)</td></tr>
+          <tr><td>CI/CD</td><td>GitHub Actions</td></tr>
+        </table>
+      </div>
+    </section>
+
+    <section class="grid" style="margin-top:18px">
+      <div class="card">
+        <h2>3. System Architecture (High level)</h2>
+        <p class="muted">Frontend talks to backend APIs (auth, automation, analytics). Heavy/async automation runs through Redis queues and worker instances; workers call Meta Graph API for allowed actions and OpenAI for AI features.</p>
+        <table>
+          <tr><th>Component</th><th>Responsibility</th></tr>
+          <tr><td>Next.js Frontend</td><td>Dashboards, scheduling UI, campaign management</td></tr>
+          <tr><td>API Server</td><td>Auth, user management, campaign APIs, analytics endpoints</td></tr>
+          <tr><td>Workers</td><td>Process queued jobs (send DMs/comments), retry & logging</td></tr>
+          <tr><td>Postgres</td><td>Users, campaigns, logs, analytics metadata</td></tr>
+          <tr><td>Redis</td><td>Job queues & rate-limit counters</td></tr>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>4. Core APIs & 1‑month Example Pricing (estimates)</h2>
+        <p class="muted">Prices below are official/public figures or vendor starting prices. Use them to model monthly infra/API costs for an MVP.</p>
+        <table>
+          <tr><th>Service</th><th>Pricing (source)</th><th>Example 1‑month cost (MVP)</th></tr>
+          <tr><td>Instagram / Meta Graph API</td><td>Free to use (rate-limited; enterprise contracts available). Source: Facebook for Developers.</td><td>Free (subject to rate-limits & app review). citeturn0search13</td></tr>
+          <tr><td>OpenAI (AI features)</td><td>Token-based pricing (see OpenAI API pricing page). Example: models charged per 1M tokens. Source: OpenAI.</td><td>~$5–$50 / month depending on usage (1M–10M tokens). citeturn1search1</td></tr>
+          <tr><td>AWS S3 (storage)</td><td>S3 Standard ~ $0.023 / GB-month for first 50 TB (region-dependent). Source: AWS.</td><td>~$2–$10 / month (100–500 GB). citeturn0search1turn0search11</td></tr>
+          <tr><td>Redis (BullMQ queue)</td><td>Redis Cloud starting from ~$5/month (flex/essentials). Source: Redis pricing.</td><td>~$5–$60 / month depending on memory/throughput. citeturn0search2turn0search7</td></tr>
+          <tr><td>Hosting (Vercel / App)</td><td>Vercel Pro $20/month + overage; backend on AWS/Render (varies).</td><td>~$20–$100 / month for MVP hosting. citeturn0search4turn0search19</td></tr>
+        </table>
+        <p class="footnote">Notes: OpenAI & other AI providers bill by usage — model choice (cheaper mini models vs flagship) drastically affects cost. Meta Graph API access is free but constrained by rate-limits and app review; high-throughput use may require partner agreements or paid solutions.</p>
+      </div>
+    </section>
+
+    <section style="margin-top:20px">
+      <div class="card">
+        <h2>5. Team & India-based Cost Estimates (monthly)</h2>
+        <p class="muted">You're a full-stack dev — below is a recommended lean team and approximate India-based monthly costs (INR). These are market ranges for hiring or contracting in India (2025 estimates).</p>
+        <table>
+          <tr><th>Role</th><th>Count</th><th>Monthly cost (INR)</th><th>Notes / source</th></tr>
+          <tr><td>Full‑Stack Developer (you)</td><td>1</td><td>₹0 (owner)</td><td>Core architecture + integration</td></tr>
+          <tr><td>Frontend Developer (Next.js)</td><td>1</td><td>₹20,000</td><td>UI & interactions. Market ranges per Glassdoor / industry reports. citeturn2search9turn2search6</td></tr>
+          <tr><td>Backend Engineer (Node.js)</td><td>1</td><td>₹15,000</td><td>API, workers, infra. Node.js market ranges. citeturn2search8turn2search11</td></tr>
+          <tr><td>UI/UX Designer</td><td>1 (part-time)</td><td>₹8,000</td><td>Design system, branding</td></tr>
+          <tr><td>QA / Tester (part-time)</td><td>1 (part-time)</td><td>₹15,000</td><td>Manual & basic API testing</td></tr>
+          <tr><td>DevOps (part-time)</td><td>1 (part-time)</td><td>₹10,000</td><td>CI/CD, infra hardening</td></tr>
+        </table>
+        <p class="muted">Typical lean-team monthly burn (excluding your own salary): <strong>₹68000</strong> (~$720) depending on experience & hiring model (freelance vs full-time).</p>
+        <p class="footnote muted">Sources: Glassdoor India, industry contractor guides (ranges converted to monthly). See citations below for market references. citeturn2search9turn2search10turn2search6</p>
+      </div>
+    </section>
+
+    <section style="margin-top:18px" class="grid">
+      <div class="card">
+        <h2>6. 12‑Week MVP Plan (Milestones)</h2>
+        <ol class="muted">
+          <li><strong>Weeks 1–2:</strong> Auth (Instagram OAuth), DB schema, basic UI skeleton.</li>
+          <li><strong>Weeks 3–5:</strong> Automation core (queue, workers, DM/comment safe runner).</li>
+          <li><strong>Weeks 6–8:</strong> Analytics ingestion (basic metrics), AI caption & hashtag generator (cheap model).</li>
+          <li><strong>Weeks 9–10:</strong> Campaigns & invite flows, search filters.</li>
+          <li><strong>Weeks 11–12:</strong> QA, run closed beta, instrumentation & lightweight monitoring.</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h2>7. Risk & Compliance</h2>
+        <ul class="muted">
+          <li>Meta Graph API rate limits — implement conservative throttling and user-level quotas.</li>
+          <li>Ensure OAuth tokens are stored securely and refresh tokens are handled safely.</li>
+          <li>Follow GDPR & local privacy regulations when storing user data.</li>
+          <li>Design anti‑abuse checks and allow manual overrides for flagged jobs.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section style="margin-top:18px" class="card">
+      <h2>8. Financial Snapshot (1st 3 months estimate)</h2>
+      <table>
+        <tr><th>Item</th><th>Month 1</th><th>Month 2</th><th>Month 3</th></tr>
+        <tr><td>Infrastructure & APIs</td><td>₹8,000</td><td>₹8,000</td><td>₹8,000</td></tr>
+        <tr><td>Team costs (lean)</td><td>₹68,000</td><td>₹68,000</td><td>₹68,000</td></tr>
+        <tr><td>Total monthly burn</td><td><strong>₹76,000</strong></td><td><strong>₹76,000</strong></td><td><strong>₹76,000</strong></td></tr>
+      </table>
+      <p class="footnote">Notes: infra estimate depends on AI usage. If you use more tokens or scale automation, OpenAI costs can grow — consider caching, smaller models, and batching.</p>
+    </section>
+
+    <section style="margin-top:18px" class="card">
+      <h2>9. Ask & Next Steps</h2>
+      <ul class="muted">
+        <li>Assemble lean team (hire 2 contractors initially: frontend + backend) while you own architecture.</li>
+        <li>Start with conservative API usage quotas and instrument usage metrics.</li>
+        <li>Run a 6-week closed beta with 20 influencers to validate automation effects & safety.</li>
+      </ul>
+      <div class="cta">
+        <button class="btn">Download PDF</button>
+        <button class="btn primary">Start Hiring Plan</button>
+      </div>
+    </section>
+
+    <footer style="margin-top:18px" class="muted">
+      <div>Sources: OpenAI API Pricing; AWS S3 Pricing; Redis Cloud Pricing; Meta / Facebook for Developers; Glassdoor & industry hiring guides for India.</div>
+      <div style="margin-top:8px" class="muted">(Detailed citations included in the project notes on request.)</div>
+    </footer>
+
+  </div>
+</body>
+</html>
